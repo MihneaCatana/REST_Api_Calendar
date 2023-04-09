@@ -1,8 +1,10 @@
 package com.labs.project_softbinator.controllers;
 
+import com.labs.project_softbinator.dtos.JuncTableDto;
 import com.labs.project_softbinator.models.Junc_Booking_Calendar;
 import com.labs.project_softbinator.models.User;
 import com.labs.project_softbinator.services.JuncService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,6 +13,7 @@ import java.util.List;
 @RestController
 public class JuncController {
 
+    @Autowired
     private JuncService service;
 
     @GetMapping("/get")
@@ -20,13 +23,15 @@ public class JuncController {
     }
 
     @PostMapping("/add")
-    public Junc_Booking_Calendar addJunc(@RequestBody Junc_Booking_Calendar juncBookingCalendar){
-        return service.saveJunc(juncBookingCalendar);
+    public String addJunc(@RequestBody JuncTableDto juncBookingCalendar){
+
+        service.saveJunc(juncBookingCalendar.getCalendar_id(),juncBookingCalendar.getBooking_id());
+        return "Junc Table was made succesfully! ";
     }
 
-    @DeleteMapping("/delete/{id}")
-    public String deleteJunc(@PathVariable int id){
-        service.deleteJunc(id);
-        return "Junc deleted with ID: "+id;
-    }
+//    @DeleteMapping("/delete/{id}")
+//    public String deleteJunc(@PathVariable int id){
+//        service.deleteJunc(id);
+//        return "Junc deleted with ID: "+id;
+//    }
 }
