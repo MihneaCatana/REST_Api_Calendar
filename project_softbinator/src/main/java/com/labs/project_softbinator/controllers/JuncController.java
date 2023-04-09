@@ -27,6 +27,6 @@ public class JuncController {
     @DeleteMapping("/delete/{id}")
     public String deleteJunc(@PathVariable int id){
         service.deleteJunc(id);
-        return "User Deleted with ID: "+id;
+        return "Junc deleted with ID: "+id;
     }
 }

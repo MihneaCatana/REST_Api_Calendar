@@ -1,13 +1,13 @@
 package com.labs.project_softbinator.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Set;
 
 
@@ -16,6 +16,7 @@ import java.util.Set;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Booking {
 
     @Id
@@ -23,13 +24,15 @@ public class Booking {
     private int id_booking;
 
     private String description;
+    @JsonFormat(pattern="yyyy-MM-dd")
+    private Date booking_date;
 
-    private LocalDateTime booking_date;
-
+    @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "user_id_booking")
+    @JoinColumn(name = "user_id")
     private User user;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "booking")
     Set<Junc_Booking_Calendar> bookings;
 

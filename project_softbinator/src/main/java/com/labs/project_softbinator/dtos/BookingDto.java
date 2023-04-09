@@ -8,11 +8,11 @@ import java.util.Date;
 
 @Data
 @Builder
-public class CalendarDto {
+public class BookingDto {
+
+    private String description;
     @JsonFormat(pattern="yyyy-MM-dd")
-    private Date start_date;
-    @JsonFormat(pattern="yyyy-MM-dd")
-    private Date end_date;
+    private Date booking_date;
 
     private int user_id;
 }

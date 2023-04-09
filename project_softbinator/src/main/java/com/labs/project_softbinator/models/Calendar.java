@@ -1,6 +1,7 @@
 package com.labs.project_softbinator.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -24,12 +25,12 @@ public class Calendar {
 
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date end_date;
-
+    @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_user")
     private User user;
-
-    @OneToMany(mappedBy = "calendar")
+    @JsonIgnore
+    @OneToMany(mappedBy = "calendar", cascade=CascadeType.ALL)
     Set<Junc_Booking_Calendar> calendars;
 
     @Override

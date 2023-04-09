@@ -1,11 +1,13 @@
 package com.labs.project_softbinator.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -25,11 +27,13 @@ public class User {
     private String password;
     private String role; // ADMIN / EMPLOYEE / CLIENT
 
-    @OneToOne(mappedBy = "user")
+
+    @OneToOne(mappedBy = "user", cascade=CascadeType.ALL)
     private Calendar calendar;
 
-    @OneToMany(mappedBy = "user")
-    private Set<Booking> bookings;
+
+    @OneToMany(mappedBy = "user", cascade=CascadeType.ALL)
+    private Set<Booking> bookings = new HashSet<>();
 
     @Override
     public String toString() {

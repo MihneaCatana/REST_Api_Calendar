@@ -27,14 +27,14 @@ public class CalendarController {
     }
 
     @PostMapping("/add")
-    public Calendar addCalendar(@RequestBody CalendarDto calendar){
+    public void addCalendar(@RequestBody CalendarDto calendar){
 
-        return service.saveCalendar(calendar);
+       service.saveCalendar(calendar);
     }
 
     @DeleteMapping("/delete/{id}")
     public String deleteCalendar(@PathVariable int id){
         service.deleteCalendar(id);
-        return "User Deleted with ID: "+id;
+        return "Calendar deleted with ID: "+id;
     }
 }

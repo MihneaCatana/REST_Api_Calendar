@@ -1,43 +1,61 @@
 package com.labs.project_softbinator.services;
 
+import com.labs.project_softbinator.dtos.BookingDto;
 import com.labs.project_softbinator.models.Booking;
+import com.labs.project_softbinator.models.User;
 import com.labs.project_softbinator.repositories.BookingRepository;
+import com.labs.project_softbinator.repositories.UserRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.awt.print.Book;
 import java.util.List;
 
 @Service
 public class BookingService {
 
     @Autowired
-    private BookingRepository repository;
+    private BookingRepository bookingRepository;
 
-    public Booking saveBooking(Booking booking) {return repository.save(booking);}
+    @Autowired
+    private UserRepository userRepository;
+
+    @Transactional
+    public void saveBooking(BookingDto bookingDto) {
+
+        User user = userRepository.getById(bookingDto.getUser_id());
+
+        Booking booking = Booking.builder().booking_date(bookingDto.getBooking_date()).user(user).description(bookingDto.getDescription()).build();
+
+        user.getBookings().add(booking);
+        bookingRepository.save(booking);
+
+    }
     public List<Booking> saveBookings(List<Booking> bookings){
-       return repository.saveAll(bookings);
+       return bookingRepository.saveAll(bookings);
     }
 
     public List<Booking> getBookings(){
-        return repository.findAll();
+        return bookingRepository.findAll();
     }
 
     public Booking getBookingById(int id){
-        return repository.findById(id).orElse(null);
+        return bookingRepository.findById(id).orElse(null);
     }
 
     public String deleteBooking(int id){
-        repository.deleteById(id);
+        bookingRepository.deleteById(id);
         return "Booking deleted ! id: "+id;
     }
 
+
+
     public Booking updateBooking(Booking booking){
-        Booking existingBooking = repository.findById(booking.getId_booking()).orElse(null);
+        Booking existingBooking = bookingRepository.findById(booking.getId_booking()).orElse(null);
         existingBooking.setUser(booking.getUser());
         existingBooking.setBooking_date(booking.getBooking_date());
 //        existingBooking.setDescription();
-        return repository.save(existingBooking);
+        return bookingRepository.save(existingBooking);
     }
 
 }

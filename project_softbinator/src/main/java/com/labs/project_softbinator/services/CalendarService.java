@@ -23,15 +23,17 @@ public class CalendarService {
 
 
     @Transactional
-    public Calendar saveCalendar(CalendarDto calendarDto) {
+    public void saveCalendar(CalendarDto calendarDto) {
 
-        User user = userRepository.getById(calendarDto.getId());
+        User user = userRepository.getById(calendarDto.getUser_id());
 
-        Calendar calendar = Calendar.builder().start_date(calendarDto.getStartDate())
-                    .end_date(calendarDto.getEndDate())
+        Calendar calendar = Calendar.builder().start_date(calendarDto.getStart_date())
+                    .end_date(calendarDto.getEnd_date())
                 .user(user).build();
 
-        return  calendarRepository.save(calendar);
+        user.setCalendar(calendar);
+
+
     }
 
     public List<Calendar> saveCalendars(List<Calendar> Calendars){
