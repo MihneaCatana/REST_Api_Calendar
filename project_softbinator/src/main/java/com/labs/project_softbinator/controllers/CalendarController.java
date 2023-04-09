@@ -1,6 +1,7 @@
 package com.labs.project_softbinator.controllers;
 
 import com.labs.project_softbinator.dtos.CalendarDto;
+import com.labs.project_softbinator.exceptions.EntityNotFound;
 import com.labs.project_softbinator.models.Calendar;
 import com.labs.project_softbinator.models.User;
 import com.labs.project_softbinator.services.CalendarService;
@@ -15,26 +16,47 @@ import java.util.List;
 public class CalendarController {
 
     @Autowired
-    private CalendarService service;
+    private CalendarService calendarService;
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @GetMapping("/get")
     public List<Calendar> findAllUsers()
     {
-        return service.getCalendars();
+        return calendarService.getCalendars();
     }
 
     @PostMapping("/add")
-    public void addCalendar(@RequestBody CalendarDto calendar){
+    public String addCalendar(@RequestBody CalendarDto calendar){
 
-       service.saveCalendar(calendar);
+       calendarService.saveCalendar(calendar);
+
+       return "Calendar was added with success!";
+    }
+
+    @PutMapping("/update/{id}")
+    public String updateCalendar(@PathVariable int id,@RequestBody CalendarDto calendarDto){
+
+        Calendar calendar = calendarService.getCalendarById(id);
+
+        if(calendar == null)
+            throw new EntityNotFound(id,CalendarController.class);
+
+        User oldUser = calendar.getUser();
+        oldUser.setCalendar(null);
+
+        User user = userService.getUserById(calendarDto.getUser_id());
+        user.setCalendar(calendar);
+
+        calendarService.updateCalendar(id,calendarDto);
+
+        return "Calendar with id: "+id+" was successfully updated!";
     }
 
     @DeleteMapping("/delete/{id}")
     public String deleteCalendar(@PathVariable int id){
-        service.deleteCalendar(id);
+        calendarService.deleteCalendar(id);
         return "Calendar deleted with ID: "+id;
     }
 }

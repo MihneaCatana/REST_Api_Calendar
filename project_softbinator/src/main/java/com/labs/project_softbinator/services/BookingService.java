@@ -43,18 +43,16 @@ public class BookingService {
         return bookingRepository.findById(id).orElse(null);
     }
 
+
     public String deleteBooking(int id){
         bookingRepository.deleteById(id);
         return "Booking deleted ! id: "+id;
     }
 
-
-
-    public Booking updateBooking(Booking booking){
-        Booking existingBooking = bookingRepository.findById(booking.getId_booking()).orElse(null);
-        existingBooking.setUser(booking.getUser());
+    public Booking updateBooking(int id, BookingDto booking){
+        Booking existingBooking = bookingRepository.findById(id).orElse(null);
         existingBooking.setBooking_date(booking.getBooking_date());
-//        existingBooking.setDescription();
+        existingBooking.setDescription(booking.getDescription());
         return bookingRepository.save(existingBooking);
     }
 

@@ -1,5 +1,6 @@
 package com.labs.project_softbinator.controllers;
 
+import com.labs.project_softbinator.dtos.UserDto;
 import com.labs.project_softbinator.models.User;
 import com.labs.project_softbinator.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,12 @@ public class UserController {
     @PostMapping("/add")
     public User addUser(@RequestBody User user){
         return service.saveUser(user);
+    }
+
+    @PutMapping("/update/{id}")
+    public String updateUser(@PathVariable int id, @RequestBody UserDto user){
+            service.updateUser(id,user);
+            return "User with id: "+ id +" was successfully updated!";
     }
 
     @DeleteMapping("/delete/{id}")
