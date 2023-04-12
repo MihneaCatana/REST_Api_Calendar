@@ -14,7 +14,7 @@ import java.io.Serializable;
 @Builder
 public class Junc_Table implements Serializable {
 
-    @Column(name="calendar_id")
+    @Column(name = "calendar_id")
     int calendarId;
 
     @Column(name = "booking_id")
@@ -28,21 +28,18 @@ public class Junc_Table implements Serializable {
     @Override
     public boolean equals(Object obj) {
 
-        if(this.calendarId > ((Junc_Table)obj).calendarId)
+        if (this.calendarId > ((Junc_Table) obj).calendarId)
             return true;
+        else if (this.calendarId < ((Junc_Table) obj).calendarId)
+            return false;
         else
-            if(this.calendarId < ((Junc_Table)obj).calendarId)
-                return false;
-            else
-                return  compareBookings(obj);
+            return compareBookings(obj);
     }
 
-    private boolean compareBookings(Object obj)
-    {
-        if(this.bookingId > ((Junc_Table)obj).bookingId)
+    private boolean compareBookings(Object obj) {
+        if (this.bookingId > ((Junc_Table) obj).bookingId)
             return true;
-        else
-        if(this.calendarId < ((Junc_Table)obj).bookingId)
+        else if (this.calendarId < ((Junc_Table) obj).bookingId)
             return false;
 
         return false;

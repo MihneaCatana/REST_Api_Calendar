@@ -11,7 +11,7 @@ import java.util.Date;
 public class BookingDto {
 
     private String description;
-    @JsonFormat(pattern="yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date booking_date;
 
     private int user_id;

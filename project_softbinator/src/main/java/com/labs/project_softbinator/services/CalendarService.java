@@ -2,7 +2,6 @@ package com.labs.project_softbinator.services;
 
 
 import com.labs.project_softbinator.dtos.CalendarDto;
-import com.labs.project_softbinator.models.Booking;
 import com.labs.project_softbinator.models.Calendar;
 import com.labs.project_softbinator.models.User;
 import com.labs.project_softbinator.repositories.CalendarRepository;
@@ -28,12 +27,12 @@ public class CalendarService {
 
         User user = userRepository.getById(calendarDto.getUser_id());
         Calendar calendar = Calendar.builder().start_date(calendarDto.getStart_date())
-                    .end_date(calendarDto.getEnd_date())
+                .end_date(calendarDto.getEnd_date())
                 .user(user).build();
         user.setCalendar(calendar);
     }
 
-    public Calendar updateCalendar(int id,CalendarDto calendar){
+    public Calendar updateCalendar(int id, CalendarDto calendar) {
         Calendar existingCalendar = calendarRepository.findById(id).orElse(null);
 
         existingCalendar.setStart_date(calendar.getStart_date());
@@ -41,20 +40,21 @@ public class CalendarService {
 
         return calendarRepository.save(existingCalendar);
     }
-    public List<Calendar> saveCalendars(List<Calendar> Calendars){
+
+    public List<Calendar> saveCalendars(List<Calendar> Calendars) {
         return calendarRepository.saveAll(Calendars);
     }
 
-    public List<Calendar> getCalendars(){
+    public List<Calendar> getCalendars() {
         return calendarRepository.findAll();
     }
 
-    public Calendar getCalendarById(int id){
+    public Calendar getCalendarById(int id) {
         return calendarRepository.findById(id).orElse(null);
     }
 
-    public String deleteCalendar(int id){
+    public String deleteCalendar(int id) {
         calendarRepository.deleteById(id);
-        return "Calendar deleted ! id: "+id;
+        return "Calendar deleted ! id: " + id;
     }
 }

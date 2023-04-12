@@ -1,6 +1,5 @@
 package com.labs.project_softbinator.config;
 
-import com.labs.project_softbinator.models.User;
 import com.labs.project_softbinator.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;

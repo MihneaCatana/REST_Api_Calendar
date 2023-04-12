@@ -22,26 +22,25 @@ public class CalendarController {
     private UserService userService;
 
     @GetMapping("/get")
-    public List<Calendar> findAllUsers()
-    {
+    public List<Calendar> findAllUsers() {
         return calendarService.getCalendars();
     }
 
     @PostMapping("/add")
-    public String addCalendar(@RequestBody CalendarDto calendar){
+    public String addCalendar(@RequestBody CalendarDto calendar) {
 
-       calendarService.saveCalendar(calendar);
+        calendarService.saveCalendar(calendar);
 
-       return "Calendar was added with success!";
+        return "Calendar was added with success!";
     }
 
     @PutMapping("/update/{id}")
-    public String updateCalendar(@PathVariable int id,@RequestBody CalendarDto calendarDto){
+    public String updateCalendar(@PathVariable int id, @RequestBody CalendarDto calendarDto) {
 
         Calendar calendar = calendarService.getCalendarById(id);
 
-        if(calendar == null)
-            throw new EntityNotFound(id,CalendarController.class);
+        if (calendar == null)
+            throw new EntityNotFound(id, CalendarController.class);
 
         User oldUser = calendar.getUser();
         oldUser.setCalendar(null);
@@ -49,14 +48,14 @@ public class CalendarController {
         User user = userService.getUserById(calendarDto.getUser_id());
         user.setCalendar(calendar);
 
-        calendarService.updateCalendar(id,calendarDto);
+        calendarService.updateCalendar(id, calendarDto);
 
-        return "Calendar with id: "+id+" was successfully updated!";
+        return "Calendar with id: " + id + " was successfully updated!";
     }
 
     @DeleteMapping("/delete/{id}")
-    public String deleteCalendar(@PathVariable int id){
+    public String deleteCalendar(@PathVariable int id) {
         calendarService.deleteCalendar(id);
-        return "Calendar deleted with ID: "+id;
+        return "Calendar deleted with ID: " + id;
     }
 }

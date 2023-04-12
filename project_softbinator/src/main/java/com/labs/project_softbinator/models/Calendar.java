@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Set;
 
@@ -20,17 +19,17 @@ public class Calendar {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id_calendar;
-    @JsonFormat(pattern="yyyy-MM-dd")
-    private Date start_date ;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date start_date;
 
-    @JsonFormat(pattern="yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date end_date;
     @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_user")
     private User user;
     @JsonIgnore
-    @OneToMany(mappedBy = "calendar", cascade=CascadeType.ALL)
+    @OneToMany(mappedBy = "calendar", cascade = CascadeType.ALL)
     Set<Junc_Booking_Calendar> calendars;
 
     @Override

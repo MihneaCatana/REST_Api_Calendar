@@ -9,9 +9,9 @@ import java.util.Date;
 @Data
 @Builder
 public class CalendarDto {
-    @JsonFormat(pattern="yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date start_date;
-    @JsonFormat(pattern="yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date end_date;
 
     private int user_id;

@@ -1,7 +1,6 @@
 package com.labs.project_softbinator.services;
 
 import com.labs.project_softbinator.dtos.UserDto;
-import com.labs.project_softbinator.exceptions.EntityNotFound;
 import com.labs.project_softbinator.models.User;
 import com.labs.project_softbinator.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,19 +18,19 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public List<User> saveUsers(List<User> users){
+    public List<User> saveUsers(List<User> users) {
         return userRepository.saveAll(users);
     }
 
-    public List<User> getUsers(){
+    public List<User> getUsers() {
         return userRepository.findAll();
     }
 
-    public User getUserById(int id){
+    public User getUserById(int id) {
         return userRepository.findById(id).orElse(null);
     }
 
-    public User updateUser(int id, UserDto user){
+    public User updateUser(int id, UserDto user) {
 
         User oldUser = userRepository.findById(id).orElse(null);
 
@@ -42,8 +41,8 @@ public class UserService {
         return userRepository.save(oldUser);
     }
 
-    public String deleteUser(int id){
+    public String deleteUser(int id) {
         userRepository.deleteById(id);
-        return "User deleted ! id: "+id;
+        return "User deleted ! id: " + id;
     }
 }

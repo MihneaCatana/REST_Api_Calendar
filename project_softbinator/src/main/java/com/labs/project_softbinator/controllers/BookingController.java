@@ -22,13 +22,12 @@ public class BookingController {
     private UserService userService;
 
     @GetMapping("/get")
-    public List<Booking> findAllBookings()
-    {
+    public List<Booking> findAllBookings() {
         return bookingService.getBookings();
     }
 
     @PostMapping("/add")
-    public String addBooking(@RequestBody BookingDto booking){
+    public String addBooking(@RequestBody BookingDto booking) {
 
         bookingService.saveBooking(booking);
 
@@ -36,11 +35,11 @@ public class BookingController {
     }
 
     @PutMapping("/update/{id}")
-    public String updateBooking(@PathVariable int id,@RequestBody BookingDto bookingDto){
+    public String updateBooking(@PathVariable int id, @RequestBody BookingDto bookingDto) {
 
         Booking booking = bookingService.getBookingById(id);
-        if( booking == null)
-            throw new EntityNotFound(id,BookingController.class);
+        if (booking == null)
+            throw new EntityNotFound(id, BookingController.class);
 
         /**
          *  Update in Users list for syncronization
@@ -51,14 +50,14 @@ public class BookingController {
         booking.setUser(user);
         user.getBookings().add(booking);
 
-        bookingService.updateBooking(id,bookingDto);
+        bookingService.updateBooking(id, bookingDto);
 
-        return "Booking with id: "+id+" was successfully updated!";
+        return "Booking with id: " + id + " was successfully updated!";
     }
 
     @DeleteMapping("/delete/{id}")
-    public String deleteCalendar(@PathVariable int id){
+    public String deleteCalendar(@PathVariable int id) {
         bookingService.deleteBooking(id);
-        return "Booking deleted with ID: "+id;
+        return "Booking deleted with ID: " + id;
     }
 }
