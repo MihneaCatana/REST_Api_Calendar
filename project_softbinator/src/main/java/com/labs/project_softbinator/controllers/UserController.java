@@ -16,26 +16,25 @@ public class UserController {
     private UserService service;
 
     @GetMapping("/get")
-    public List<User> findAllUsers()
-    {
+    public List<User> findAllUsers() {
         return service.getUsers();
     }
 
     @PostMapping("/add")
-    public User addUser(@RequestBody User user){
+    public User addUser(@RequestBody User user) {
         return service.saveUser(user);
     }
 
     @PutMapping("/update/{id}")
-    public String updateUser(@PathVariable int id, @RequestBody UserDto user){
-            service.updateUser(id,user);
-            return "User with id: "+ id +" was successfully updated!";
+    public String updateUser(@PathVariable int id, @RequestBody UserDto user) {
+        service.updateUser(id, user);
+        return "User with id: " + id + " was successfully updated!";
     }
 
     @DeleteMapping("/delete/{id}")
-    public String deleteUser(@PathVariable int id){
+    public String deleteUser(@PathVariable int id) {
         service.deleteUser(id);
-        return "User Deleted with ID: "+id;
+        return "User Deleted with ID: " + id;
     }
 
 

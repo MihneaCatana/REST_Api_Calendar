@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface JuncBookingCalendarRepository extends JpaRepository<Junc_Booking_Calendar,Integer> {
+public interface JuncBookingCalendarRepository extends JpaRepository<Junc_Booking_Calendar, Integer> {
 
 }

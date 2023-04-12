@@ -1,6 +1,5 @@
 package com.labs.project_softbinator.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,11 +27,11 @@ public class User {
     private String role; // ADMIN / EMPLOYEE / CLIENT
 
 
-    @OneToOne(mappedBy = "user", cascade=CascadeType.ALL)
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Calendar calendar;
 
 
-    @OneToMany(mappedBy = "user", cascade=CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<Booking> bookings = new HashSet<>();
 
     @Override

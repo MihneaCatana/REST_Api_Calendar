@@ -1,6 +1,5 @@
 package com.labs.project_softbinator.services;
 
-import com.labs.project_softbinator.dtos.JuncTableDto;
 import com.labs.project_softbinator.models.Booking;
 import com.labs.project_softbinator.models.Calendar;
 import com.labs.project_softbinator.models.Junc_Booking_Calendar;
@@ -29,26 +28,26 @@ public class JuncService {
     @Transactional
     public void saveJunc(int calendar_id, int booking_id) {
 
-        Junc_Table tabel= new Junc_Table(calendar_id,booking_id);
+        Junc_Table tabel = new Junc_Table(calendar_id, booking_id);
         Calendar calendar = calendarRepository.findById(calendar_id).orElse(null);
         Booking booking = bookingRepository.findById(booking_id).orElse(null);
-        juncBookingCalendarRepository.save(new Junc_Booking_Calendar(tabel,calendar,booking));
+        juncBookingCalendarRepository.save(new Junc_Booking_Calendar(tabel, calendar, booking));
     }
 
-    public List<Junc_Booking_Calendar> saveJuncs(List<Junc_Booking_Calendar> juncBookingCalendarList){
+    public List<Junc_Booking_Calendar> saveJuncs(List<Junc_Booking_Calendar> juncBookingCalendarList) {
         return juncBookingCalendarRepository.saveAll(juncBookingCalendarList);
     }
 
-    public List<Junc_Booking_Calendar> getJuncs(){
+    public List<Junc_Booking_Calendar> getJuncs() {
         return juncBookingCalendarRepository.findAll();
     }
 
-    public Junc_Booking_Calendar getJuncById(int id){
+    public Junc_Booking_Calendar getJuncById(int id) {
         return juncBookingCalendarRepository.findById(id).orElse(null);
     }
 
-    public String deleteJunc(int idBooking){
+    public String deleteJunc(int idBooking) {
         juncBookingCalendarRepository.deleteById(idBooking);
-        return "User deleted ! id: "+idBooking;
+        return "User deleted ! id: " + idBooking;
     }
 }

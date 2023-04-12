@@ -31,25 +31,26 @@ public class BookingService {
         bookingRepository.save(booking);
 
     }
-    public List<Booking> saveBookings(List<Booking> bookings){
-       return bookingRepository.saveAll(bookings);
+
+    public List<Booking> saveBookings(List<Booking> bookings) {
+        return bookingRepository.saveAll(bookings);
     }
 
-    public List<Booking> getBookings(){
+    public List<Booking> getBookings() {
         return bookingRepository.findAll();
     }
 
-    public Booking getBookingById(int id){
+    public Booking getBookingById(int id) {
         return bookingRepository.findById(id).orElse(null);
     }
 
 
-    public String deleteBooking(int id){
+    public String deleteBooking(int id) {
         bookingRepository.deleteById(id);
-        return "Booking deleted ! id: "+id;
+        return "Booking deleted ! id: " + id;
     }
 
-    public Booking updateBooking(int id, BookingDto booking){
+    public Booking updateBooking(int id, BookingDto booking) {
         Booking existingBooking = bookingRepository.findById(id).orElse(null);
         existingBooking.setBooking_date(booking.getBooking_date());
         existingBooking.setDescription(booking.getDescription());

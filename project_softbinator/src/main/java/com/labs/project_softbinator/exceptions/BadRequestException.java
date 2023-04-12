@@ -4,7 +4,7 @@ import java.lang.reflect.Type;
 import java.text.MessageFormat;
 import java.time.Instant;
 
-public class BadRequestException extends RuntimeException{
+public class BadRequestException extends RuntimeException {
 
     private final String message;
     private final Instant issuedAt;
